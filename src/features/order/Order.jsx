@@ -12,6 +12,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { clearCart } from "../cart/cartSlice";
+import UpdateOrder from "./UpdateOrder";
 
 function Order() {
   const order = useLoaderData();
@@ -56,11 +57,13 @@ function Order() {
       </div>
 
       <div className="flex items-center justify-between flex-wrap gap-2 bg-stone-300 px-6 py-5">
-        <p>
-          {deliveryIn >= 0
-            ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
-            : "Order should have arrived"}
-        </p>
+        {deliveryIn >= 0 ? (
+          <p>Only {calcMinutesLeft(estimatedDelivery)} minutes left 😃</p>
+        ) : (
+          <p className="text-green-600 font-semibold">
+            Order should have arrived
+          </p>
+        )}
         <p className="text-xs text-stone-500">
           (Estimated delivery: {formatDate(estimatedDelivery)})
         </p>
@@ -93,6 +96,7 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+      {!priority && <UpdateOrder order={order} />}
     </div>
   );
 }
