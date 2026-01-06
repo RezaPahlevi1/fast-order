@@ -16,7 +16,7 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
         </p>
       </div>
 
-      <p className="mt-1 text-xs text-neutral-400 italic">
+      <p className="mt-1 text-xs text-neutral-400 capitalize italic">
         {isLoadingIngredients ? "Loading ingredients…" : ingredients.join(", ")}
       </p>
     </li>

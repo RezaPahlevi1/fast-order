@@ -37,6 +37,9 @@ function CreateOrder() {
 
   const isLoadingAddress = addressStatus === "loading";
 
+  const inputClass =
+    "w-28 sm:w-64 sm:focus:w-72 rounded-2xl px-3 py-2 text-sm bg-neutral-900 text-neutral-200 border border-neutral-700 placeholder:text-neutral-500 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/40 transition-all duration-300";
+
   if (!cart.length) return <EmptyCart />;
 
   return (
@@ -62,7 +65,7 @@ function CreateOrder() {
             <input className="input w-full" type="tel" name="phone" required />
           </div>
           {formErrors?.phone && (
-            <p className="bg-red-100 text-xs p-2 rounded-md text-red-800W">
+            <p className="bg-red-500/10 text-red-400 text-xs p-2 rounded-md">
               {formErrors.phone}
             </p>
           )}
