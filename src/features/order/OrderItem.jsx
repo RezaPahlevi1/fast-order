@@ -4,17 +4,20 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
   const { quantity, name, totalPrice } = item;
 
   return (
-    <li className="border-y divide-y divide-stone-200 py-3">
+    <li className="border-b border-neutral-800 py-4">
       <div className="flex items-start justify-between gap-4">
-        <p className="font-medium">
-          <span className="mr-1 text-stone-600">{quantity}×</span>
+        <p className="font-medium text-neutral-100">
+          <span className="mr-2 text-neutral-400">{quantity}×</span>
           {name}
         </p>
-        <p className="font-semibold">{formatCurrency(totalPrice)}</p>
+
+        <p className="font-semibold text-yellow-400">
+          {formatCurrency(totalPrice)}
+        </p>
       </div>
 
-      <p className="mt-1 text-sm text-stone-500 capitalize italic">
-        {isLoadingIngredients ? "Loading..." : ingredients.join(", ")}
+      <p className="mt-1 text-xs text-neutral-400 italic">
+        {isLoadingIngredients ? "Loading ingredients…" : ingredients.join(", ")}
       </p>
     </li>
   );

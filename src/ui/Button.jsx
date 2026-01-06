@@ -2,16 +2,28 @@ import { Link } from "react-router-dom";
 
 function Button({ children, disabled, to, type, onClick }) {
   const base =
-    "bg-yellow-400 inline-block  rounded-full uppercase transition-colors duration-300 font-semibold tracking-wide hover:bg-yellow-500 cursor-pointer";
+    "inline-flex items-center justify-center rounded-xl uppercase font-semibold tracking-wide transition-all duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed";
 
   const styles = {
-    primary: base + " px-4 py-3 md:px-6 md-py-4",
-    small: base + " px-4 py-2 md:px-5 md-py-2.5 text-xs",
-    round: base + " px-2.5 py-1 md:px-3 md:py-1.5 text-s cursor-pointer",
+    primary:
+      base +
+      " bg-yellow-400 text-neutral-900 px-4 py-2.5 text-sm hover:bg-yellow-300 active:scale-95",
+
+    small:
+      base +
+      " bg-yellow-400 text-neutral-900 px-3 py-1.5 text-xs hover:bg-yellow-300 active:scale-95",
+
+    round:
+      base +
+      " bg-neutral-800 text-yellow-400 px-2.5 py-1 text-xs border border-yellow-400/30 hover:bg-neutral-700 active:scale-95",
+
     secondary:
-      "bg-stone-300 text-stone-600 inline-block px-4 py-3 rounded-full uppercase transition-colors duration-300 font-semibold tracking-wide hover:bg-stone-400 cursor-pointer",
+      base +
+      " bg-neutral-800 text-neutral-200 px-4 py-2.5 text-sm border border-neutral-700 hover:bg-neutral-700",
+
     delete:
-      "bg-red-500 text-white inline-block px-4 py-2 md:px-5 md-py-2.5 text-xs rounded-full uppercase transition-colors duration-300 font-semibold tracking-wide hover:bg-red-600 focus:ring-2 focus:ring-red-300 cursor-pointer",
+      base +
+      " bg-red-500/90 text-white px-3 py-1.5 text-xs hover:bg-red-600 active:scale-95 focus:ring-2 focus:ring-red-400/40",
   };
 
   if (to)

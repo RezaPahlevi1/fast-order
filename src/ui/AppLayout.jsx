@@ -6,14 +6,15 @@ import Loader from "./Loader";
 function AppLayout() {
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
+
   return (
-    <div className="font-montserrat grid grid-rows-[auto_1fr_auto] h-screen">
+    <div className="font-montserrat grid grid-rows-[auto_1fr_auto] h-screen bg-neutral-950 text-neutral-200">
       {isLoading && <Loader />}
 
       <Header />
 
-      <div className="overflow-scroll">
-        <main className="max-w-3xl mx-auto ">
+      <div className="overflow-y-auto">
+        <main className="mx-auto max-w-3xl px-4 py-6">
           <Outlet />
         </main>
       </div>

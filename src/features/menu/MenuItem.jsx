@@ -16,36 +16,45 @@ function MenuItem({ pizza }) {
   function handleAddToCart() {
     const newItem = {
       pizzaId: id,
-      name: name,
+      name,
       quantity: 1,
       unitPrice,
-      totalPrice: unitPrice * 1,
+      totalPrice: unitPrice,
     };
 
     dispatch(addItem(newItem));
   }
 
   return (
-    <li className="flex gap-5 py-2 px-2 cursor-pointer hover:bg-yellow-100/20 transition-all duration-200">
+    <li className="group flex gap-5 px-4 py-3 transition-all duration-200 hover:bg-neutral-800/60">
       <img
-        className={`h-24 ${soldOut ? "grayscale opacity-60" : ""}`}
+        className={`h-24 w-24 rounded-lg object-cover ring-1 ring-neutral-800 transition-all duration-200 ${
+          soldOut ? "grayscale opacity-60" : "group-hover:ring-yellow-400/40"
+        }`}
         src={imageUrl}
         alt={name}
       />
+
       <div className="flex grow flex-col">
-        <p>{name}</p>
-        <p>{ingredients.join(", ")}</p>
-        <div className="mt-auto flex items-center justify-between text-sm">
+        <p className="font-semibold text-neutral-100 tracking-wide">{name}</p>
+
+        <p className="mt-1 text-xs text-neutral-400 capitalize italic">
+          {ingredients.join(", ")}
+        </p>
+
+        <div className="mt-auto flex items-center justify-between pt-3 text-sm">
           {!soldOut ? (
-            <p>{formatCurrency(unitPrice)}</p>
+            <p className="font-medium text-yellow-400">
+              {formatCurrency(unitPrice)}
+            </p>
           ) : (
-            <p className="uppercase font-semibold text-xs text-slate-500">
+            <p className="uppercase font-semibold text-xs text-neutral-500">
               Sold out
             </p>
           )}
 
           {isInCart && (
-            <div className="flex gap-1 md:gap-3">
+            <div className="flex gap-2">
               <UpdateItem pizzaId={id} currentQuantity={currentQuantity} />
               <DeleteItem pizzaId={id} />
             </div>

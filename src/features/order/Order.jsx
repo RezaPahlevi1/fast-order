@@ -37,35 +37,40 @@ function Order() {
     if (!fetcher.data && fetcher.state === "idle") fetcher.load("/menu");
   }, [fetcher]);
 
-  console.log(fetcher.data);
-
   return (
     <div className="px-4 py-6 space-y-8">
-      <div className="flex items-center justify-between flex-wrap gap-2">
-        <h2 className="text-xl font-semibold">Order Number #{id} Status</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-xl font-semibold tracking-wide">Order #{id}</h2>
 
-        <div className="space-x-3">
+        <div className="flex gap-2">
           {priority && (
-            <span className="bg-red-500 text-red-100 text-sm rounded-full tracking-widest uppercase font-bold py-1 px-2">
-              Priority{" "}
+            <span className="rounded-full border border-red-400/30 bg-red-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-red-400">
+              Priority
             </span>
           )}
-          <span className="bg-green-500 text-green-100 text-sm rounded-full tracking-widest uppercase font-bold py-1 px-2">
-            {status} order
+          <span className="rounded-full border border-yellow-400/30 bg-yellow-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-yellow-400">
+            {status}
           </span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between flex-wrap gap-2 bg-stone-300 px-6 py-5">
+      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-neutral-800 bg-neutral-900/60 px-6 py-5">
         {deliveryIn >= 0 ? (
-          <p>Only {calcMinutesLeft(estimatedDelivery)} minutes left 😃</p>
+          <p className="text-neutral-200">
+            Only{" "}
+            <span className="font-semibold text-yellow-400">
+              {deliveryIn} minutes
+            </span>{" "}
+            left
+          </p>
         ) : (
-          <p className="text-green-600 font-semibold">
+          <p className="font-semibold text-green-400">
             Order should have arrived
           </p>
         )}
-        <p className="text-xs text-stone-500">
-          (Estimated delivery: {formatDate(estimatedDelivery)})
+
+        <p className="text-xs text-neutral-400">
+          Estimated delivery: {formatDate(estimatedDelivery)}
         </p>
       </div>
 
@@ -83,19 +88,25 @@ function Order() {
         ))}
       </ul>
 
-      <div className="bg-stone-300 px-6 py-5 space-y-2">
-        <p className="text-xs text-stone-500 font-semibold">
-          Price pizza: {formatCurrency(orderPrice)}
+      <div className="rounded-xl border border-neutral-800 bg-neutral-900/60 px-6 py-5 space-y-2">
+        <p className="text-xs text-neutral-400">
+          Pizza price: {formatCurrency(orderPrice)}
         </p>
+
         {priority && (
-          <p className="text-xs text-stone-500 font-semibold">
-            Price priority: {formatCurrency(priorityPrice)}
+          <p className="text-xs text-neutral-400">
+            Priority price: {formatCurrency(priorityPrice)}
           </p>
         )}
-        <p className="font-bold">
-          To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
-        </p>
+
+        <div className="flex justify-between pt-2 border-t border-neutral-800">
+          <p className="font-semibold text-neutral-200">Total payment</p>
+          <p className="font-bold text-yellow-400">
+            {formatCurrency(orderPrice + priorityPrice)}
+          </p>
+        </div>
       </div>
+
       {!priority && <UpdateOrder order={order} />}
     </div>
   );
